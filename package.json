@@ -1,17 +1,38 @@
 {
-  "name": "paper-dashboard-2",
-  "description": "Bootstrap 4 Paper Design",
-  "version": "2.0.1",
-  "homepage": "http://creative-tim.com/product/paper-dashboard-2",
-  "author": "Creative Tim",
-  "license": "Creative Tim License <www.creative-tim.com/license>",
+  "name": "farm-dashboard",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@babel/core": ">=7.0.0 <8.0.0",
+    "@mui/icons-material": "^5.11.0",
+    "@mui/lab": "5.0.0-alpha.112",
+    "@mui/material": "^5.11.0",
+    "@mui/styles": "^5.11.0",
+    "@mui/system": "^5.11.0",
+    "@mui/x-data-grid": "^5.17.14",
+    "@mui/x-date-pickers": "^5.0.10",
+    "date-fns": "^2.29.3",
+    "formik": "^2.2.9",
+    "highcharts": "^10.3.2",
+    "moment": "^2.29.4",
+    "query-string": "^8.0.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-mui-fileuploader": "^0.3.0",
+    "react-router-dom": "^6.4.5",
+    "uuid": "^9.0.0",
+    "yup": "^0.32.11"
+  },
   "devDependencies": {
-    "gulp": "^4.0.2",
-    "gulp-autoprefixer": "^6.1.0",
-    "gulp-clean": "^0.4.0",
-    "gulp-install": "^1.1.0",
-    "gulp-sass": "^4.0.2",
-    "gulp-sourcemaps": "^2.6.5",
-    "gulp-open": "^3.0.1"
+    "@types/react": "^17.0.52",
+    "@types/react-dom": "^18.0.9",
+    "@vitejs/plugin-react": "^3.0.0",
+    "vite": "^4.0.0"
   }
 }
