@@ -78,9 +78,9 @@ export default function Login() {
                 maxWidth: (isMobile) ? '100%' : '50%'
             }}>
                 <br /><br /><br /><br />
-                <img src="/landing_page.png" style={{ marginLeft: "42%", textAlign: "center" }} height="100px" alt="logo" />
+                <img src="/vite.svg" style={{ marginLeft: "42%", textAlign: "center" }} height="100px" alt="logo" />
                 <br />
-                <Typography variant="h5" sx={{ textAlign: "center", fontWeight: 'bold' }}>Login</Typography>
+                <Typography variant="h5" sx={{ textAlign: "center", fontWeight: 'bold' }}>FarmHub</Typography>
 
                 <Container sx={{
                     padding: '3.5em', alignContent: 'center',
@@ -111,13 +111,13 @@ export default function Login() {
                     <br />
                     <Button variant="contained"
                         disableElevation onClick={e => { login() }}
-                        sx={{ width: "45%", backgroundColor: "#632165", borderRadius: "10px" }}>Login</Button>
+                        sx={{ width: "45%", backgroundColor: "green", borderRadius: "10px" }}>Login</Button>
 
                     <br />
                     <br />
                     <br />
                     <br />
-                    <Typography sx={{ textDecoration: "underline", float: 'right', color: '#632165' }}
+                    <Typography sx={{ textDecoration: "underline", float: 'right', color: 'lightblue' }}
                         textAlign="center"
                     ><a href="/reset-password">Forgot Password?</a></Typography>
                     <br />
@@ -129,11 +129,7 @@ export default function Login() {
 
 
             </Box>
-            {/* <Paper sx={{ backgroundColor: "#632165", color: 'white', minWidth: '100%' }}>
-                <br />
-                <br />
-                <br />
-            </Paper> */}
+           
         </>
     )
 

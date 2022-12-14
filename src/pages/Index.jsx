@@ -1,8 +1,6 @@
 import { Typography, Stack, TextField, Grid, Container, useMediaQuery, Card, CardContent, CircularProgress } from '@mui/material'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import * as qs from 'query-string';
-import Layout from '../components/Layout';
 import { getCookie } from '../lib/cookie';
 import { apiHost } from './../lib/api';
 
@@ -46,9 +44,7 @@ export default function Index() {
 
 
 
-    let isMobile = useMediaQuery('(max-width:600px)');
 
-    let args = qs.parse(window.location.search);
 
 
     useEffect(() => {

@@ -81,7 +81,7 @@ export default function HeaderDrawer({ children }) {
     setOpen(open === item ? null : item);
   }
 
-  let title = "Mama's Hub";
+  let title = "FarmHub";
   let navigate = useNavigate();
   let [role, setRole] = useState(getCookie('role'));
   const settings = [{ 'My Account': '/account' }, { Logout: '/logout' }];
@@ -155,13 +155,7 @@ export default function HeaderDrawer({ children }) {
       name: 'Dashboard',
       icon: <Dashboard />,
       path: '/',
-      roles: ['FACILITY_ADMINISTRATOR', 'NURSE'],
-    },
-    {
-      name: 'Client List',
-      icon: <People />,
-      path: '/patients',
-      roles: ['NURSE'],
+      roles: ['USER', 'NURSE'],
     },
     {
       name: 'ANC Forms',
@@ -172,91 +166,91 @@ export default function HeaderDrawer({ children }) {
           name: 'Client Registration',
           icon: <i className='fa-solid fa-user-pen'></i>,
           path: '/patient-registration',
-          roles: ['ADMINISTRATOR', 'FACILITY_ADMINISTRATOR', 'NURSE'],
+          roles: ['ADMINISTRATOR', 'USER', 'NURSE'],
         },
         {
           name: 'Antenatal Profile',
           icon: <DescriptionOutlined />,
           path: '/antenatal-profile',
-          roles: ['ADMINISTRATOR', 'FACILITY_ADMINISTRATOR', 'NURSE'],
+          roles: ['ADMINISTRATOR', 'USER', 'NURSE'],
         },
         {
           name: 'Medical & Surgical History',
           icon: <MedicationRounded />,
           path: '/medical-surgical-history',
-          roles: ['ADMINISTRATOR', 'FACILITY_ADMINISTRATOR', 'NURSE'],
+          roles: ['ADMINISTRATOR', 'USER', 'NURSE'],
         },
         {
           name: 'Physical Examination',
           icon: <BiotechRounded />,
           path: '/physical-examination',
-          roles: ['ADMINISTRATOR', 'FACILITY_ADMINISTRATOR', 'NURSE'],
+          roles: ['ADMINISTRATOR', 'USER', 'NURSE'],
         },
         {
           name: 'Birth Plan',
           icon: <BallotRounded />,
           path: '/birth-plan',
-          roles: ['ADMINISTRATOR', 'FACILITY_ADMINISTRATOR', 'NURSE'],
+          roles: ['ADMINISTRATOR', 'USER', 'NURSE'],
         },
         {
           name: 'Previous Pregnancy',
           icon: <PregnantWomanRounded />,
           path: '/previous-pregnancy',
-          roles: ['ADMINISTRATOR', 'FACILITY_ADMINISTRATOR', 'NURSE'],
+          roles: ['ADMINISTRATOR', 'USER', 'NURSE'],
         },
         {
           name: 'Present Pregnancy',
           icon: <AccessTimeRounded />,
           path: '/present-pregnancy',
-          roles: ['ADMINISTRATOR', 'FACILITY_ADMINISTRATOR', 'NURSE'],
+          roles: ['ADMINISTRATOR', 'USER', 'NURSE'],
         },
         {
           name: 'Tetanus & Diptheria',
           icon: <Vaccines />,
           path: '/tetanus-diptheria',
-          roles: ['ADMINISTRATOR', 'FACILITY_ADMINISTRATOR', 'NURSE'],
+          roles: ['ADMINISTRATOR', 'USER', 'NURSE'],
         },
         {
           name: 'Malaria Prophylaxis',
           icon: <i className='fa-solid fa-mosquito-net'></i>,
           path: '/malaria-prophylaxis',
-          roles: ['ADMINISTRATOR', 'FACILITY_ADMINISTRATOR', 'NURSE'],
+          roles: ['ADMINISTRATOR', 'USER', 'NURSE'],
         },
         {
           name: 'Maternal Serology',
           icon: <Bloodtype />,
           path: '/maternal-serology',
-          roles: ['ADMINISTRATOR', 'FACILITY_ADMINISTRATOR', 'NURSE'],
+          roles: ['ADMINISTRATOR', 'USER', 'NURSE'],
         },
         {
           name: 'Deworming',
           icon: <i className='fa-solid fa-pills'></i>,
           path: '/deworming',
-          roles: ['ADMINISTRATOR', 'FACILITY_ADMINISTRATOR', 'NURSE'],
+          roles: ['ADMINISTRATOR', 'USER', 'NURSE'],
         },
         {
           name: 'IFAS',
           icon: <MedicationLiquidRounded />,
           path: '/ifas',
-          roles: ['ADMINISTRATOR', 'FACILITY_ADMINISTRATOR', 'NURSE'],
+          roles: ['ADMINISTRATOR', 'USER', 'NURSE'],
         },
         {
           name: 'PMTCT Interventions',
           icon: <LocalHospitalRounded />,
           path: '/pmtct-interventions',
-          roles: ['ADMINISTRATOR', 'FACILITY_ADMINISTRATOR', 'NURSE'],
+          roles: ['ADMINISTRATOR', 'USER', 'NURSE'],
         },
         {
           name: 'Counselling',
           icon: <PeopleRounded />,
           path: '/counselling',
-          roles: ['ADMINISTRATOR', 'FACILITY_ADMINISTRATOR', 'NURSE'],
+          roles: ['ADMINISTRATOR', 'USER', 'NURSE'],
         },
         {
           name: 'CHW Referrals',
           icon: <i className='fa-solid fa-circle-nodes'></i>,
           path: '/community-referrals',
-          roles: ['ADMINISTRATOR', 'FACILITY_ADMINISTRATOR', 'NURSE'],
+          roles: ['ADMINISTRATOR', 'USER', 'NURSE'],
         },
       ],
     },
@@ -264,19 +258,13 @@ export default function HeaderDrawer({ children }) {
       name: 'Reports',
       icon: <DescriptionRounded />,
       path: '/reports',
-      roles: ['FACILITY_ADMINISTRATOR', 'NURSE'],
+      roles: ['USER', 'NURSE'],
       children: [
         {
-          name: 'MOH 405',
+          name: 'Sample',
           icon: <PivotTableChart />,
           path: '/moh-reports',
-          roles: ['FACILITY_ADMINISTRATOR', 'NURSE'],
-        },
-        {
-          name: 'MOH 711',
-          icon: <PivotTableChart />,
-          path: '/moh-711',
-          roles: ['FACILITY_ADMINISTRATOR', 'NURSE'],
+          roles: ['USER', 'NURSE'],
         },
       ],
     },
@@ -284,7 +272,7 @@ export default function HeaderDrawer({ children }) {
       name: 'Users',
       icon: <People />,
       path: '/users',
-      roles: ['ADMINISTRATOR', 'FACILITY_ADMINISTRATOR'],
+      roles: ['ADMINISTRATOR', 'USER'],
     },
     {
       name: 'Facilities',
@@ -296,7 +284,7 @@ export default function HeaderDrawer({ children }) {
       name: 'Account & Settings',
       icon: <Settings />,
       path: '/account',
-      roles: ['ADMINISTRATOR', 'FACILITY_ADMINISTRATOR', 'NURSE'],
+      roles: ['ADMINISTRATOR', 'USER', 'NURSE'],
     },
   ];
 
@@ -307,7 +295,7 @@ export default function HeaderDrawer({ children }) {
         position='fixed'
         sx={{
           zIndex: theme => theme.zIndex.drawer + 1,
-          backgroundColor: '#632165',
+          backgroundColor: 'green',
         }}
         elevation={0}
       >
@@ -317,7 +305,7 @@ export default function HeaderDrawer({ children }) {
               onClick={e => {
                 navigate('/');
               }}
-              src='/landing_page.png'
+              src='/vite.svg'
               height='50px'
               alt='logo'
             />
@@ -347,18 +335,18 @@ export default function HeaderDrawer({ children }) {
               {title}
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-              {pages.map(page => (
+              {/* {pages.map(page => (
                 <Button
                   key={Object.keys(page)[0]}
                   onClick={e => {
                     navigate(`${page[Object.keys(page)[0]]}`);
                     handleCloseNavMenu();
                   }}
-                  sx={{ my: 2, color: '#632165', display: 'block' }}
+                  sx={{ my: 2, color: 'green', display: 'block' }}
                 >
                   {Object.keys(page)[0]}
                 </Button>
-              ))}
+              ))} */}
             </Box>
             {getCookie('token') ? (
               <Box sx={{ flexGrow: 0 }}>
@@ -418,7 +406,7 @@ export default function HeaderDrawer({ children }) {
         variant='permanent'
         sx={{
           width: drawerWidth,
-          backgroundColor: '#632165',
+          backgroundColor: 'green',
           flexShrink: 0,
           [`& .MuiDrawer-paper`]: {
             width: drawerWidth,
@@ -430,7 +418,7 @@ export default function HeaderDrawer({ children }) {
         <Box
           sx={{
             overflow: 'auto',
-            backgroundColor: '#632165',
+            backgroundColor: 'green',
             minHeight: 'calc(100vh - 64px)',
           }}
         >
@@ -446,15 +434,15 @@ export default function HeaderDrawer({ children }) {
                         sx={{
                           backgroundColor: isActiveTab(route.name)
                             ? 'white'
-                            : '#632165',
-                          color: isActiveTab(route.name) ? '#632165' : 'white',
+                            : 'green',
+                          color: isActiveTab(route.name) ? 'green' : 'white',
                           '&:hover': { backgroundColor: 'gray' },
                         }}
                       >
                         <ListItemIcon
                           sx={{
                             color: isActiveTab(route.name)
-                              ? '#632165'
+                              ? 'green'
                               : 'white',
                           }}
                         >
@@ -486,10 +474,10 @@ export default function HeaderDrawer({ children }) {
                                 sx={{
                                   backgroundColor: isActiveTab(form.name)
                                     ? 'white'
-                                    : '#632165',
+                                    : 'green',
                                   marginLeft: '10px',
                                   color: isActiveTab(form.name)
-                                    ? '#632165'
+                                    ? 'green'
                                     : 'white',
                                   '&:hover': { backgroundColor: 'gray' },
                                 }}
@@ -497,7 +485,7 @@ export default function HeaderDrawer({ children }) {
                                 <ListItemIcon
                                   sx={{
                                     color: isActiveTab(form.name)
-                                      ? '#632165'
+                                      ? 'green'
                                       : 'white',
                                   }}
                                 >
@@ -517,8 +505,8 @@ export default function HeaderDrawer({ children }) {
                       sx={{
                         backgroundColor: isActiveTab(route.name)
                           ? 'white'
-                          : '#632165',
-                        color: isActiveTab(route.name) ? '#632165' : 'white',
+                          : 'green',
+                        color: isActiveTab(route.name) ? 'green' : 'white',
                         '&:hover': { backgroundColor: 'gray' },
                       }}
                       key={route.name}
@@ -530,7 +518,7 @@ export default function HeaderDrawer({ children }) {
                     >
                       <ListItemIcon
                         sx={{
-                          color: isActiveTab(route.name) ? '#632165' : 'white',
+                          color: isActiveTab(route.name) ? 'green' : 'white',
                         }}
                       >
                         {route.icon}
