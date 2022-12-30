@@ -90,11 +90,11 @@ export default function Login() {
                 }}>
                     <TextField
                         sx={{ minWidth: "50%" }}
-                        type="email"
-                        label="Email Address"
-                        placeholder="Email Address"
+                        type="phone"
+                        label="Phone number"
+                        placeholder="Phone number"
                         size="small"
-                        onChange={e => { setLoginInfo({ ...loginInfo, email: e.target.value }) }}
+                        onChange={e => { setLoginInfo({ ...loginInfo, phone: e.target.value }) }}
 
                     />
                     <br /><br />

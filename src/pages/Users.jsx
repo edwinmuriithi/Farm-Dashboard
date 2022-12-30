@@ -36,20 +36,6 @@ export default function Users() {
         return;
     }
 
-    // fetch users
-    let getFacilities = async () => {
-        try {
-            let data = (await (await fetch(`${apiHost}/admin/facilities`,
-                { method: "GET", headers: { "Content-Type": "application/json", "Authorization": `Bearer ${getCookie("token")}` } })).json())
-            setFacilities(data.facilities);
-            // prompt("Facilites successfully fetched");
-            return;
-        } catch (error) {
-            prompt(JSON.stringify(error));
-            return;
-        }
-    }
-
 
     let getProfile = async () => {
         let _data = (await (await fetch(`${apiHost}/auth/me`,
@@ -63,12 +49,8 @@ export default function Users() {
             navigate('/');
             return
         }
-        setKmhflCode(_data.data.kmhflCode);
         setRole(_data.data.role);
-        if (_data.data.role === "ADMINISTRATOR") {
-            getFacilities();
-        }
-        return
+        return;
     }
 
 
@@ -173,13 +155,11 @@ export default function Users() {
     }, [])
 
     const columns = [
-        { field: 'names', headerName: 'Names', width: 150 },
-        { field: 'email', headerName: 'Email', width: 130 },
-        { field: 'phone', headerName: 'Phone Number', width: 130 },
-        { field: 'role', headerName: 'Role', width: 150 },
-        { field: 'facilityName', headerName: 'Assigned Facility', width: 150 },
-        { field: 'facilityKmhflCode', headerName: 'KMHFL Code', width: 130 },
-        { field: 'disabled', headerName: 'Disabled', width: 120 }
+        { field: 'names', headerName: 'Names', width: 200 },
+        { field: 'email', headerName: 'Email', width: 200 },
+        { field: 'phone', headerName: 'Phone Number', width: 150 },
+        { field: 'role', headerName: 'Role', width: 180 },
+        { field: 'disabled', headerName: 'Disabled', width: 150 }
 
     ];
 
@@ -229,6 +209,7 @@ export default function Users() {
                     rowsPerPageOptions={[10]}
                     checkboxSelection
                     autoHeight
+                    editMode={false}
                     disableSelectionOnClick
                     onSelectionModelChange={e => { setSelected(e) }}
                     onCellEditStop={e => { console.log(e) }}
@@ -281,25 +262,12 @@ export default function Users() {
                                     size="small"
                                 >
                                     {role === "ADMINISTRATOR" && <MenuItem value={"ADMINISTRATOR"}>Administrator</MenuItem>}
-                                    {role === "ADMINISTRATOR" && <MenuItem value={"FACILITY_ADMINISTRATOR"}>Facility Administrator</MenuItem>}
-                                    <MenuItem value={"NURSE"}>Nurse/Clinical Officer</MenuItem>
-                                    <MenuItem value={"CHW"}>CHW</MenuItem>
+                                    {role === "ADMINISTRATOR" && <MenuItem value={"SPECIALIST"}>Specialist</MenuItem>}
+                                    {role === "ADMINISTRATOR" && <MenuItem value={"USER"}>User</MenuItem>}
                                 </Select>
                             </FormControl>
 
-                            {(role && role === "ADMINISTRATOR") && <FormControl fullWidth>
-                                <InputLabel>Facility</InputLabel>
-                                <Select
-                                    value={data.kmhflCode}
-                                    label="Facility"
-                                    onChange={e => { setData({ ...data, kmhflCode: e.target.value }) }}
-                                    size="small"
-                                >
-                                    {facilities.map((facility) => {
-                                        return <MenuItem value={facility.kmhflCode}>{facility.name}</MenuItem>
-                                    })}
-                                </Select>
-                            </FormControl>}
+                            
                             {editMode && <Grid item xs={12} md={12} lg={6}>
                                 <FormControl fullWidth>
                                     <InputLabel id="demo-simple-select-label">Account Status</InputLabel>

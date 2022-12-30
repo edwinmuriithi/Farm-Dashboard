@@ -16,9 +16,9 @@ export let createEncounter = async (patientId, encounterCode) => {
             }
         })).json()
         console.log(encounter.id)
-        return encounter.encounter
+        return encounter.encounter;
     } catch (error) {
-        return null
+        return null;
     }
 }
 
@@ -40,7 +40,7 @@ export let FhirApi = async (params) => {
             statusText: response.statusText,
             data: responseJSON
         }
-        return res
+        return res;
     } catch (error) {
         console.error(error)
         let res = {

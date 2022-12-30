@@ -23,6 +23,7 @@
     "moment": "^2.29.4",
     "query-string": "^8.0.2",
     "react": "^18.2.0",
+    "react-chat-elements": "^12.0.6",
     "react-dom": "^18.2.0",
     "react-mui-fileuploader": "^0.3.0",
     "react-router-dom": "^6.4.5",

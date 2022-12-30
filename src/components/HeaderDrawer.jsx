@@ -28,6 +28,9 @@ import {
   PeopleRounded,
   GroupsRounded,
   DescriptionRounded,
+  Message,
+  ChatBubble,
+  ChatBubbleRounded,
 } from '@mui/icons-material';
 import { useNavigate, Routes, Route } from 'react-router-dom';
 import { useEffect, useState } from 'react';
@@ -155,104 +158,13 @@ export default function HeaderDrawer({ children }) {
       name: 'Dashboard',
       icon: <Dashboard />,
       path: '/',
-      roles: ['USER', 'NURSE'],
+      roles: ['ADMINISTRATOR'],
     },
     {
-      name: 'ANC Forms',
-      icon: <i className='fa-solid fa-pen-to-square'></i>,
-      roles: ['NURSE'],
-      children: [
-        {
-          name: 'Client Registration',
-          icon: <i className='fa-solid fa-user-pen'></i>,
-          path: '/patient-registration',
-          roles: ['ADMINISTRATOR', 'USER', 'NURSE'],
-        },
-        {
-          name: 'Antenatal Profile',
-          icon: <DescriptionOutlined />,
-          path: '/antenatal-profile',
-          roles: ['ADMINISTRATOR', 'USER', 'NURSE'],
-        },
-        {
-          name: 'Medical & Surgical History',
-          icon: <MedicationRounded />,
-          path: '/medical-surgical-history',
-          roles: ['ADMINISTRATOR', 'USER', 'NURSE'],
-        },
-        {
-          name: 'Physical Examination',
-          icon: <BiotechRounded />,
-          path: '/physical-examination',
-          roles: ['ADMINISTRATOR', 'USER', 'NURSE'],
-        },
-        {
-          name: 'Birth Plan',
-          icon: <BallotRounded />,
-          path: '/birth-plan',
-          roles: ['ADMINISTRATOR', 'USER', 'NURSE'],
-        },
-        {
-          name: 'Previous Pregnancy',
-          icon: <PregnantWomanRounded />,
-          path: '/previous-pregnancy',
-          roles: ['ADMINISTRATOR', 'USER', 'NURSE'],
-        },
-        {
-          name: 'Present Pregnancy',
-          icon: <AccessTimeRounded />,
-          path: '/present-pregnancy',
-          roles: ['ADMINISTRATOR', 'USER', 'NURSE'],
-        },
-        {
-          name: 'Tetanus & Diptheria',
-          icon: <Vaccines />,
-          path: '/tetanus-diptheria',
-          roles: ['ADMINISTRATOR', 'USER', 'NURSE'],
-        },
-        {
-          name: 'Malaria Prophylaxis',
-          icon: <i className='fa-solid fa-mosquito-net'></i>,
-          path: '/malaria-prophylaxis',
-          roles: ['ADMINISTRATOR', 'USER', 'NURSE'],
-        },
-        {
-          name: 'Maternal Serology',
-          icon: <Bloodtype />,
-          path: '/maternal-serology',
-          roles: ['ADMINISTRATOR', 'USER', 'NURSE'],
-        },
-        {
-          name: 'Deworming',
-          icon: <i className='fa-solid fa-pills'></i>,
-          path: '/deworming',
-          roles: ['ADMINISTRATOR', 'USER', 'NURSE'],
-        },
-        {
-          name: 'IFAS',
-          icon: <MedicationLiquidRounded />,
-          path: '/ifas',
-          roles: ['ADMINISTRATOR', 'USER', 'NURSE'],
-        },
-        {
-          name: 'PMTCT Interventions',
-          icon: <LocalHospitalRounded />,
-          path: '/pmtct-interventions',
-          roles: ['ADMINISTRATOR', 'USER', 'NURSE'],
-        },
-        {
-          name: 'Counselling',
-          icon: <PeopleRounded />,
-          path: '/counselling',
-          roles: ['ADMINISTRATOR', 'USER', 'NURSE'],
-        },
-        {
-          name: 'CHW Referrals',
-          icon: <i className='fa-solid fa-circle-nodes'></i>,
-          path: '/community-referrals',
-          roles: ['ADMINISTRATOR', 'USER', 'NURSE'],
-        },
-      ],
+      name: 'Messaging',
+      icon: <ChatBubbleRounded />,
+      path: '/messaging',
+      roles: ['SPECIALIST'],
     },
     {
       name: 'Reports',
@@ -275,16 +187,10 @@ export default function HeaderDrawer({ children }) {
       roles: ['ADMINISTRATOR', 'USER'],
     },
     {
-      name: 'Facilities',
-      icon: <Domain />,
-      path: '/facilities',
-      roles: ['ADMINISTRATOR'],
-    },
-    {
       name: 'Account & Settings',
       icon: <Settings />,
       path: '/account',
-      roles: ['ADMINISTRATOR', 'USER', 'NURSE'],
+      roles: ['ADMINISTRATOR', 'USER', 'SPECIALIST'],
     },
   ];
 

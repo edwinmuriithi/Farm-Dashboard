@@ -42,7 +42,7 @@ export default function Account() {
 
   return (
     <>
-      <Typography>Account Information</Typography>
+      <Typography variant="h4">Account Information</Typography>
 
       {profile ? (
         <Card>
@@ -54,9 +54,9 @@ export default function Account() {
             <Typography variant="h5">{profile.names}</Typography>
             <Divider />
 
-            <Typography>Email Address:</Typography>
+            {/* <Typography>Email Address:</Typography>
             <Typography variant="h6">{profile.email}</Typography>
-            <Divider />
+            <Divider /> */}
 
             <Typography>Phone Number:</Typography>
             <Typography variant="h6">{profile.phone || ""}</Typography>
@@ -64,14 +64,6 @@ export default function Account() {
 
             <Typography>Role:</Typography>
             <Typography variant="h6">{profile.role}</Typography>
-            <Divider />
-
-            <Typography>Assigned Facility:</Typography>
-            <Typography variant="h5">{profile.facilityName || ""}</Typography>
-            <Divider />
-
-            <Typography>Facility Code:</Typography>
-            <Typography variant="h5">{profile.kmhflCode || ""}</Typography>
             <Divider />
 
             <Typography>Created At:</Typography>

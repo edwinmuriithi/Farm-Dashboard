@@ -1,1 +1,23 @@
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css');
+
+
+html {
+    scroll-behavior: smooth;
+  }
+  
+  /* Layout */
+  main {
+    max-width: 700px;
+    margin: 3rem auto;
+    padding: 0 1rem;
+  }
+  
+  #scroll-to-bottom {
+    font-weight: bold;
+    color: green;
+  }
+
+  .chatbox {
+    border: 3px green solid;
+    border-radius: 10px;
+  }
