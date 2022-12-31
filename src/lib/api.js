@@ -14,8 +14,8 @@ export let createEncounter = async (patientId, encounterCode) => {
                 "Content-Type": 'application/json',
                 "Authorization": `Bearer ${getCookie("token")}`,
             }
-        })).json()
-        console.log(encounter.id)
+        })).json();
+        console.log(encounter.id);
         return encounter.encounter;
     } catch (error) {
         return null;

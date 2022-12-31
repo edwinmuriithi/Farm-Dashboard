@@ -6,6 +6,7 @@ import {
   CircularProgress,
   Divider,
   Grid,
+  Container,
   CardContent,
 } from "@mui/material";
 import { getCookie } from "../lib/cookie";
@@ -42,46 +43,48 @@ export default function Account() {
 
   return (
     <>
-      <Typography variant="h4">Account Information</Typography>
+      <Container maxWidth="lg" >
+        <Typography variant="h4">Account Information</Typography>
 
-      {profile ? (
-        <Card>
-          <CardContent>
-            <Typography>User ID:</Typography>
-            <Typography variant="h6">{profile.id}</Typography>
-            <Divider />
-            <Typography>Names:</Typography>
-            <Typography variant="h5">{profile.names}</Typography>
-            <Divider />
+        {profile ? (
+          <Card>
+            <CardContent>
+              <Typography>User ID:</Typography>
+              <Typography variant="h6">{profile.id}</Typography>
+              <Divider />
+              <Typography>Names:</Typography>
+              <Typography variant="h5">{profile.names}</Typography>
+              <Divider />
 
-            {/* <Typography>Email Address:</Typography>
+              {/* <Typography>Email Address:</Typography>
             <Typography variant="h6">{profile.email}</Typography>
             <Divider /> */}
 
-            <Typography>Phone Number:</Typography>
-            <Typography variant="h6">{profile.phone || ""}</Typography>
-            <Divider />
+              <Typography>Phone Number:</Typography>
+              <Typography variant="h6">{profile.phone || ""}</Typography>
+              <Divider />
 
-            <Typography>Role:</Typography>
-            <Typography variant="h6">{profile.role}</Typography>
-            <Divider />
+              <Typography>Role:</Typography>
+              <Typography variant="h6">{profile.role}</Typography>
+              <Divider />
 
-            <Typography>Created At:</Typography>
-            <Typography variant="h6">
-              {new Date(profile.createdAt).toLocaleString()}
-            </Typography>
-            <Divider />
+              <Typography>Created At:</Typography>
+              <Typography variant="h6">
+                {new Date(profile.createdAt).toLocaleString()}
+              </Typography>
+              <Divider />
 
-            <Typography>Last Updated At:</Typography>
-            <Typography variant="h6">
-              {new Date(profile.updatedAt).toLocaleString()}
-            </Typography>
-            <Divider />
-          </CardContent>
-        </Card>
-      ) : (
-        <CircularProgress />
-      )}
+              <Typography>Last Updated At:</Typography>
+              <Typography variant="h6">
+                {new Date(profile.updatedAt).toLocaleString()}
+              </Typography>
+              <Divider />
+            </CardContent>
+          </Card>
+        ) : (
+          <CircularProgress />
+        )}
+      </Container>
     </>
   );
 }
