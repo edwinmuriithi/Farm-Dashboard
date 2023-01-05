@@ -50,8 +50,8 @@ export default function CurrentPatient({ data }) {
                             <Typography>Age: {data.age + " "}</Typography>
                         </Grid>
                         <Grid item xl={4.2} lg={4.2} sm={3} md={3}>
-                            <Button variant="contained" sx={{ backgroundColor: "#632165", float: "left" }} startIcon={<MedicalInformation />} onClick={e => { navigate(`/patients/${data.id}`) }}>View Profile</Button>
-                            <Button variant="contained" sx={{ backgroundColor: "#632165", float: "right" }} startIcon={<Close />} onClick={e => { endVisit() }}>Close Visit</Button>
+                            <Button variant="contained" sx={{ backgroundColor: "green", float: "left" }} startIcon={<MedicalInformation />} onClick={e => { navigate(`/patients/${data.id}`) }}>View Profile</Button>
+                            <Button variant="contained" sx={{ backgroundColor: "green", float: "right" }} startIcon={<Close />} onClick={e => { endVisit() }}>Close Visit</Button>
                         </Grid>
                     </Grid>
                 </CardContent>

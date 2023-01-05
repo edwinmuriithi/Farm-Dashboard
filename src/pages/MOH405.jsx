@@ -189,7 +189,7 @@ export default function GeneralPatientLevel() {
           {/* {results.length > 0 && <Button variant="contained"
                         disableElevation
                         onClick={e => { setOpenModal(true) }}
-                        sx={{ width: "20%", backgroundColor: "#632165", borderRadius: "10px", float: "right" }}>Select Indicators</Button>} */}
+                        sx={{ width: "20%", backgroundColor: "green", borderRadius: "10px", float: "right" }}>Select Indicators</Button>} */}
 
           <br />
           <Grid container spacing={1} padding=".5em">
@@ -277,7 +277,7 @@ export default function GeneralPatientLevel() {
                 }}
                 sx={{
                   // width: "20%",
-                  backgroundColor: "#632165",
+                  backgroundColor: "green",
                   borderRadius: "10px",
                   float: "right",
                 }}

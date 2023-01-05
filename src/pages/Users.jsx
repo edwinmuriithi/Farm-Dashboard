@@ -209,16 +209,16 @@ export default function Users() {
                     {(!isMobile) && <Typography sx={{ minWidth: (selected.length > 1) ? '60%' : (selected.length === 1) ? "30%" : '80%' }}></Typography>}
                     {(selected.length > 0) &&
                         <>
-                            <Button variant="contained" onClick={e => { deleteUsers() }} disableElevation sx={{ backgroundColor: "#632165" }}>Delete User{(selected.length > 1) && `s`}</Button>
+                            <Button variant="contained" onClick={e => { deleteUsers() }} disableElevation sx={{ backgroundColor: "green" }}>Delete User{(selected.length > 1) && `s`}</Button>
                         </>
                     }
                     {(selected.length === 1) &&
                         <>
-                            <Button variant="contained" disableElevation sx={{ backgroundColor: "#632165" }} onClick={e => { setEditMode(true); handleOpen() }}>Edit User Details</Button>
-                            <Button variant="contained" disableElevation sx={{ backgroundColor: "#632165" }} onClick={e => { resetPassword() }}>Reset Password</Button>
+                            <Button variant="contained" disableElevation sx={{ backgroundColor: "green" }} onClick={e => { setEditMode(true); handleOpen() }}>Edit User Details</Button>
+                            <Button variant="contained" disableElevation sx={{ backgroundColor: "green" }} onClick={e => { resetPassword() }}>Reset Password</Button>
                         </>
                     }
-                    <Button variant="contained" disableElevation sx={{ backgroundColor: "#632165" }} onClick={e => { setEditMode(false); handleOpen() }}>Create New User</Button>
+                    <Button variant="contained" disableElevation sx={{ backgroundColor: "green" }} onClick={e => { setEditMode(false); handleOpen() }}>Create New User</Button>
                 </Stack>
                 <p></p>
                 <DataGrid
@@ -314,7 +314,7 @@ export default function Users() {
                                     </Select>
                                 </FormControl>
                             </Grid>}
-                            <Button variant='contained' sx={{ backgroundColor: "#632165" }} onClick={e => { editMode ? editUser() : createUser() }}>{editMode ? "Update User Details" : "Create User"}</Button>
+                            <Button variant='contained' sx={{ backgroundColor: "green" }} onClick={e => { editMode ? editUser() : createUser() }}>{editMode ? "Update User Details" : "Create User"}</Button>
                             <br />
                         </Stack>
                     </Box>

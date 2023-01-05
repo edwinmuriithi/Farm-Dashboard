@@ -91,7 +91,7 @@ export default function Preview({ title, format = {}, data, ...props }) {
               variant='contained'
               onClick={props.close}
               disableElevation
-              sx={{ backgroundColor: '#632165' }}
+              sx={{ backgroundColor: 'green' }}
             >
               Edit
             </Button>
