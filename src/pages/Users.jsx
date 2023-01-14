@@ -3,7 +3,6 @@ import {
     Grid, TextField, Typography, Modal, Box, Stack, Button, Alert, useMediaQuery, CardContent, LinearProgress,
     FormControl, InputLabel, Select, MenuItem, Snackbar
 } from '@mui/material'
-import Layout from '../components/Layout'
 import { getCookie } from './../lib/cookie'
 import { useNavigate } from 'react-router-dom'
 import { DataGrid } from '@mui/x-data-grid'

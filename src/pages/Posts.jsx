@@ -77,7 +77,6 @@ export default function Posts() {
             <Grid container spacing={1} padding=".5em">
               {posts.length > 0 &&
                 posts.map((post) => {
-                  console.log(post);
                   return (
                     <Grid item xs={12} md={12} lg={4}>
                       <DataCard
