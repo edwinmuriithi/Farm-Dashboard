@@ -62,7 +62,7 @@ export default function Messages() {
           "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAYoINhVpkXavV0tKLAccqg0PXm605HeLHB0kOecwcKA&s",
         alt: d.recipientId,
         title: d.recipient.names,
-        subtitle: d.text,
+        subtitle: String(d.text).substring(0, 100),
         date: new Date(d.updatedAt),
         unread: d.read ? 1 : 0,
       });
