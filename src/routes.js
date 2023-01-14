@@ -3,6 +3,7 @@ import Users from './pages/Users';
 import Reports from './pages/MOH405';
 import Index from './pages/Index';
 import Messages from './pages/Messages';
+import Posts from './pages/Posts';
 
 const appRoutes = [
   {
@@ -14,8 +15,8 @@ const appRoutes = [
     element: Users,
   },
   {
-    path: '/moh-reports',
-    element: Reports,
+    path: '/posts',
+    element: Posts,
   },
   {
     path: '/account',

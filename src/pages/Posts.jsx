@@ -1,10 +1,10 @@
 import {
   Typography,
-  Stack,
-  TextField,
+  Button,
+  CardActions,
   Grid,
   Container,
-  useMediaQuery,
+  CardMedia,
   Card,
   CardContent,
   CircularProgress,
@@ -14,11 +14,11 @@ import { useNavigate } from "react-router-dom";
 import { getCookie } from "../lib/cookie";
 import { apiHost } from "./../lib/api";
 
-export default function Index() {
+export default function Posts() {
   let [patients, setPatients] = useState();
   let navigate = useNavigate();
   let [data, setData] = useState({});
-  let [posts, setPosts] = useState({});
+  let [posts, setPosts] = useState([]);
   let [role, setRole] = useState(null);
   let [facilities, setFacilities] = useState([]);
 
@@ -33,21 +33,7 @@ export default function Index() {
         },
       })
     ).json();
-    setPosts(data.data);
-    return;
-  };
-
-  let processPost = async (postId) => {
-    let data = await (
-      await fetch(`${apiHost}/posts/specialist/${postId}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${getCookie("token")}`,
-        },
-      })
-    ).json();
-    getPosts();
+    setPosts(data.posts);
     return;
   };
 
@@ -62,8 +48,8 @@ export default function Index() {
       })
     ).json();
     setRole(_data.data.role);
-    if (_data.data.role === "SPECIALIST") {
-      navigate("/messaging");
+    if (_data.data.role !== "SPECIALIST") {
+      navigate("/");
       return;
     }
     return;
@@ -83,20 +69,21 @@ export default function Index() {
 
   return (
     <>
-      <br />
+      {/* <br /> */}
       <Container maxWidth="lg">
-        {role === "ADMINISTRATOR" || role === "FACILITY_ADMINISTRATOR" ? (
+        {role === "SPECIALIST" ? (
           <>
             <Typography variant="h5">Welcome </Typography>
             <Grid container spacing={1} padding=".5em">
-              {Object.keys(data).length > 0 &&
-                Object.keys(data).map((entry) => {
+              {posts.length > 0 &&
+                posts.map((post) => {
+                  console.log(post);
                   return (
-                    <Grid item xs={12} md={12} lg={3}>
-                      <StatCard
-                        title={entry.toUpperCase()}
-                        number={data[entry]}
-                        bg="#D0ADFC"
+                    <Grid item xs={12} md={12} lg={4}>
+                      <DataCard
+                        text={post.description}
+                        image={post.image}
+                        postId={post.id}
                       />
                     </Grid>
                   );
@@ -111,14 +98,47 @@ export default function Index() {
   );
 }
 
-let StatCard = ({ number, title, bg }) => {
+let DataCard = ({ text, image, postId }) => {
+  let navigate = useNavigate();
+
+  let processPost = async (postId) => {
+    let data = await (
+      await fetch(`${apiHost}/posts/specialist/${postId}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${getCookie("token")}`,
+        },
+      })
+    ).json();
+    // getPosts();
+    navigate("/messaging");
+    return;
+  };
+
   return (
     <>
-      <Card sx={{ backgroundColor: bg }}>
+      <Card>
+        <CardMedia sx={{ height: 180 }} image={image} title="green iguana" />
         <CardContent>
-          <Typography variant="h4">{number}</Typography>
-          <Typography variant="h6">{title}</Typography>
+          <Typography variant="p" sx={{ wordWrap: "break-word" }}>
+            {text}
+          </Typography>
+          <br />
         </CardContent>
+        <CardActions>
+          <Button
+            size="small"
+            variant="contained"
+            disableElevation
+            sx={{ backgroundColor: "darkgreen" }}
+            onClick={(e) => {
+              processPost(postId);
+            }}
+          >
+            Respond
+          </Button>
+        </CardActions>
       </Card>
     </>
   );
