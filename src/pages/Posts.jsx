@@ -121,8 +121,13 @@ let DataCard = ({ text, image, postId }) => {
       <Card>
         <CardMedia sx={{ height: 180 }} image={image} title="green iguana" />
         <CardContent>
-          <Typography variant="p" sx={{ wordWrap: "break-word" }}>
-            {text}
+          <Typography
+            variant="p"
+            sx={{
+              wordWrap: "break-word"
+            }}
+          >
+            {String(text).substring(0, 37)}
           </Typography>
           <br />
         </CardContent>
