@@ -161,6 +161,12 @@ export default function HeaderDrawer({ children }) {
       roles: ['ADMINISTRATOR'],
     },
     {
+      name: 'Posts',
+      icon: <ChatBubbleRounded />,
+      path: '/posts',
+      roles: ['SPECIALIST'],
+    },
+    {
       name: 'Messaging',
       icon: <ChatBubbleRounded />,
       path: '/messaging',
