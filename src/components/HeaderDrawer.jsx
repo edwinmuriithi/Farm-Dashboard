@@ -173,24 +173,10 @@ export default function HeaderDrawer({ children }) {
       roles: ['SPECIALIST'],
     },
     {
-      name: 'Reports',
-      icon: <DescriptionRounded />,
-      path: '/reports',
-      roles: ['USER', 'NURSE'],
-      children: [
-        {
-          name: 'Sample',
-          icon: <PivotTableChart />,
-          path: '/moh-reports',
-          roles: ['USER', 'NURSE'],
-        },
-      ],
-    },
-    {
       name: 'Users',
       icon: <People />,
       path: '/users',
-      roles: ['ADMINISTRATOR', 'USER'],
+      roles: ['ADMINISTRATOR'],
     },
     {
       name: 'Account & Settings',
