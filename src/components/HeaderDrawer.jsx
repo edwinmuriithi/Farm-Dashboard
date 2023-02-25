@@ -32,6 +32,7 @@ import {
   ChatBubble,
   ChatBubbleRounded,
   PostAdd,
+  VideoCameraBackOutlined,
 } from "@mui/icons-material";
 import { useNavigate, Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -165,6 +166,12 @@ export default function HeaderDrawer({ children }) {
       name: "Posts",
       icon: <PostAdd />,
       path: "/posts",
+      roles: ["SPECIALIST"],
+    },
+    {
+      name: "Media",
+      icon: <VideoCameraBackOutlined />,
+      path: "/media",
       roles: ["SPECIALIST"],
     },
     {

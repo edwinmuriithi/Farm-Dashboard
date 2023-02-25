@@ -15,7 +15,6 @@ import {
 } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import * as qs from "query-string";
 import { getCookie } from "../lib/cookie";
 import { apiHost, FhirApi } from "./../lib/api";
 import { ChatList, MessageList, Input } from "react-chat-elements";
@@ -159,7 +158,7 @@ export default function Messages() {
       console.log(imageUrl);
       reader.onload = function (e) {
         document.getElementById("previewImg").src = e.target.result;
-        setMessage({ ...message, file: file });
+        setMessage({ ...message, video: file });
       };
       // setMessage({ ...message, image: imageUrl });
     };
