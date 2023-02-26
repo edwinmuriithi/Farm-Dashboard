@@ -20,21 +20,25 @@ export default function Posts() {
   let [data, setData] = useState({});
   let [posts, setPosts] = useState([]);
   let [role, setRole] = useState(null);
-  let [facilities, setFacilities] = useState([]);
 
   // fetch dashboard stats
   let getPosts = async () => {
-    let data = await (
-      await fetch(`${apiHost}/posts/specialist`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${getCookie("token")}`,
-        },
-      })
-    ).json();
-    setPosts(data.posts);
-    return;
+    try {
+      let data = await (
+        await fetch(`${apiHost}/posts/specialist`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${getCookie("token")}`,
+          },
+        })
+      ).json();
+      setPosts(data.posts);
+      return;
+    } catch (error) {
+      console.log(error);
+      return;
+    }
   };
 
   let getProfile = async () => {
@@ -123,7 +127,7 @@ let DataCard = ({ text, image, postId }) => {
           <Typography
             variant="p"
             sx={{
-              wordWrap: "break-word"
+              wordWrap: "break-word",
             }}
           >
             {String(text).substring(0, 37)}

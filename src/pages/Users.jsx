@@ -432,6 +432,43 @@ export default function Users() {
               </Select>
             </FormControl>
 
+            <Grid item xs={12} md={12} lg={6}>
+                <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-label">
+                    County
+                  </InputLabel>
+                  <Select
+                    value={data.status}
+                    label="County"
+                    onChange={(e) => {
+                      setData({ ...data, county: e.target.value });
+                    }}
+                    size="small"
+                  >
+                    <MenuItem value={"disabled"}>Disabled</MenuItem>
+                    <MenuItem value={"enabled"}>Enabled</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
+              <Grid item xs={12} md={12} lg={6}>
+                <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-label">
+                    SubCounty
+                  </InputLabel>
+                  <Select
+                    value={data.status}
+                    label="SubCounty"
+                    onChange={(e) => {
+                      setData({ ...data, subCounty: e.target.value });
+                    }}
+                    size="small"
+                  >
+                    <MenuItem value={"disabled"}>Disabled</MenuItem>
+                    <MenuItem value={"enabled"}>Enabled</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
+
             {editMode && (
               <Grid item xs={12} md={12} lg={6}>
                 <FormControl fullWidth>
