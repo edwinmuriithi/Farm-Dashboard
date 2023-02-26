@@ -1,6 +1,5 @@
 import Account from './pages/Account';
 import Users from './pages/Users';
-import Reports from './pages/MOH405';
 import Index from './pages/Index';
 import Messages from './pages/Messages';
 import Posts from './pages/Posts';

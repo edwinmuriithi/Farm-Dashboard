@@ -78,9 +78,9 @@ export default function Login() {
                 maxWidth: (isMobile) ? '100%' : '50%'
             }}>
                 <br /><br /><br /><br />
-                <img src="/vite.svg" style={{ marginLeft: "42%", textAlign: "center" }} height="100px" alt="logo" />
+                <img src="./logo.png" style={{ marginLeft: "42%", textAlign: "center" }} height="100px" alt="logo" />
                 <br />
-                <Typography variant="h5" sx={{ textAlign: "center", fontWeight: 'bold' }}>FarmHub</Typography>
+                {/* <Typography variant="h5" sx={{ textAlign: "center", fontWeight: 'bold' }}>FarmHub</Typography> */}
 
                 <Container sx={{
                     padding: '3.5em', alignContent: 'center',

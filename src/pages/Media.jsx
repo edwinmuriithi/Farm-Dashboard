@@ -140,7 +140,7 @@ export default function Posts() {
       })
     ).json();
     setRole(_data.data.role);
-    if (_data.data.role !== "SPECIALIST") {
+    if (_data.data.role !== "ADMINISTRATOR") {
       navigate("/");
       return;
     }
@@ -170,7 +170,7 @@ export default function Posts() {
           message={promptMessage}
           key={"loginAlert"}
         />
-        {role === "SPECIALIST" ? (
+        {role === "ADMINISTRATOR" ? (
           <>
             <Typography variant="p" sx={{ fontSize: "30px" }}>
               Media{" "}

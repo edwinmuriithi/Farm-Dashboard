@@ -172,7 +172,7 @@ export default function HeaderDrawer({ children }) {
       name: "Media",
       icon: <VideoCameraBackOutlined />,
       path: "/media",
-      roles: ["SPECIALIST"],
+      roles: ["ADMINISTRATOR"],
     },
     {
       name: "Messaging",
@@ -201,7 +201,7 @@ export default function HeaderDrawer({ children }) {
         position="fixed"
         sx={{
           zIndex: (theme) => theme.zIndex.drawer + 1,
-          backgroundColor: "green",
+          backgroundColor: "darkolivegreen",
         }}
         elevation={0}
       >
@@ -211,7 +211,7 @@ export default function HeaderDrawer({ children }) {
               onClick={(e) => {
                 navigate("/");
               }}
-              src="/vite.svg"
+              src="/logo.png"
               height="50px"
               alt="logo"
             />
@@ -312,7 +312,7 @@ export default function HeaderDrawer({ children }) {
         variant="permanent"
         sx={{
           width: drawerWidth,
-          backgroundColor: "green",
+          backgroundColor: "darkolivegreen",
           flexShrink: 0,
           [`& .MuiDrawer-paper`]: {
             width: drawerWidth,
@@ -324,7 +324,7 @@ export default function HeaderDrawer({ children }) {
         <Box
           sx={{
             overflow: "auto",
-            backgroundColor: "green",
+            backgroundColor: "darkolivegreen",
             minHeight: "calc(100vh - 64px)",
           }}
         >
@@ -340,14 +340,14 @@ export default function HeaderDrawer({ children }) {
                         sx={{
                           backgroundColor: isActiveTab(route.name)
                             ? "white"
-                            : "green",
-                          color: isActiveTab(route.name) ? "green" : "white",
+                            : "darkolivegreen",
+                          color: isActiveTab(route.name) ? "darkolivegreen" : "white",
                           "&:hover": { backgroundColor: "gray" },
                         }}
                       >
                         <ListItemIcon
                           sx={{
-                            color: isActiveTab(route.name) ? "green" : "white",
+                            color: isActiveTab(route.name) ? "darkolivegreen" : "white",
                           }}
                         >
                           {route.icon}
@@ -378,10 +378,10 @@ export default function HeaderDrawer({ children }) {
                                 sx={{
                                   backgroundColor: isActiveTab(form.name)
                                     ? "white"
-                                    : "green",
+                                    : "darkolivegreen",
                                   marginLeft: "10px",
                                   color: isActiveTab(form.name)
-                                    ? "green"
+                                    ? "darkolivegreen"
                                     : "white",
                                   "&:hover": { backgroundColor: "gray" },
                                 }}
@@ -389,7 +389,7 @@ export default function HeaderDrawer({ children }) {
                                 <ListItemIcon
                                   sx={{
                                     color: isActiveTab(form.name)
-                                      ? "green"
+                                      ? "darkolivegreen"
                                       : "white",
                                   }}
                                 >
@@ -409,8 +409,8 @@ export default function HeaderDrawer({ children }) {
                       sx={{
                         backgroundColor: isActiveTab(route.name)
                           ? "white"
-                          : "green",
-                        color: isActiveTab(route.name) ? "green" : "white",
+                          : "darkolivegreen",
+                        color: isActiveTab(route.name) ? "darkolivegreen" : "white",
                         "&:hover": { backgroundColor: "gray" },
                       }}
                       key={route.name}
