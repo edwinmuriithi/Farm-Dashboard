@@ -17,14 +17,14 @@ import {
   MenuItem,
   Snackbar,
 } from "@mui/material";
-import * as React from 'react';
-import Paper from '@mui/material/Paper';
-import InputBase from '@mui/material/InputBase';
-import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import SearchIcon from '@mui/icons-material/Search';
-import DirectionsIcon from '@mui/icons-material/Directions';
+import * as React from "react";
+import Paper from "@mui/material/Paper";
+import InputBase from "@mui/material/InputBase";
+import Divider from "@mui/material/Divider";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
+import SearchIcon from "@mui/icons-material/Search";
+import DirectionsIcon from "@mui/icons-material/Directions";
 import { getCookie } from "./../lib/cookie";
 import { useNavigate } from "react-router-dom";
 import { DataGrid } from "@mui/x-data-grid";
@@ -33,7 +33,7 @@ import { apiHost } from "../lib/api";
 export default function Users() {
   let [users, setUsers] = useState(null);
   let [editMode, setEditMode] = useState(false);
-  let [facilities, setFacilities] = useState([]);
+  let [phone, setPhone] = useState(null);
   let [open, setOpen] = useState(false);
   let [data, setData] = useState({});
   const handleOpen = () => setOpen(true);
@@ -215,9 +215,24 @@ export default function Users() {
     }
   }, []);
 
-  let searchUsers = async () =>{
-
-  }
+  let searchUsers = async () => {
+    try {
+      let response = await (
+        await fetch(`${apiHost}/users?phone=${phone}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${getCookie("token")}`,
+          },
+        })
+      ).json();
+      setUsers(response.users);
+      return;
+    } catch (error) {
+      prompt(JSON.stringify(error));
+      return;
+    }
+  };
 
   const columns = [
     { field: "names", headerName: "Names", width: 200 },
@@ -317,17 +332,25 @@ export default function Users() {
         component="form"
         sx={{ p: "2px 4px", display: "flex", alignItems: "center", width: 400 }}
       >
-        
         <InputBase
           sx={{ ml: 1, flex: 1 }}
           placeholder="Search users by phone number"
           inputProps={{ "aria-label": "search users" }}
+          onChange={(e) => {
+            setPhone(e.target.value);
+          }}
         />
-        <IconButton type="button" sx={{ p: "10px" }} aria-label="search" onClick={e=>{searchUsers()}}>
+        <IconButton
+          type="button"
+          sx={{ p: "10px" }}
+          aria-label="search"
+          onClick={(e) => {
+            searchUsers();
+          }}
+        >
           <SearchIcon />
         </IconButton>
         <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
-        
       </Paper>
       <p></p>
       <DataGrid
