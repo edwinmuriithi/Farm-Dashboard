@@ -43,9 +43,13 @@ export default function Account() {
 
   return (
     <>
-      <Container maxWidth="lg" >
-        <Typography variant="h4">Account Information</Typography>
-
+      <Container maxWidth="lg">
+        <Typography variant="p" sx={{ fontSize: "30px" }}>
+          My Account{" "}
+        </Typography>
+        <p></p>
+        <Divider />
+        <p></p>
         {profile ? (
           <Card>
             <CardContent>

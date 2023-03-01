@@ -12,24 +12,26 @@ import {
   CircularProgress,
   TextField,
   Snackbar,
+  Divider,
 } from "@mui/material";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getCookie } from "../lib/cookie";
 import { apiHost } from "./../lib/api";
 
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 650,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};
+
 export default function Posts() {
-  const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: 650,
-    bgcolor: "background.paper",
-    border: "2px solid #000",
-    boxShadow: 24,
-    p: 4,
-  };
   function snackbar(text) {
     setPromptMessage(text);
     setOpenSnackBar(true);
@@ -48,6 +50,7 @@ export default function Posts() {
   let [posts, setPosts] = useState([]);
   let [role, setRole] = useState(null);
   const handleOpen = () => setOpen(true);
+
   const handleClose = () => setOpen(false);
 
   // fetch dashboard stats
@@ -184,6 +187,9 @@ export default function Posts() {
             >
               Upload Media
             </Button>
+            <Divider />
+            <p></p>
+
             <Modal keepMounted open={open} onClose={handleClose}>
               <Box sx={style}>
                 <video
@@ -260,6 +266,26 @@ export default function Posts() {
 let DataCard = ({ title, description, video, postId }) => {
   let navigate = useNavigate();
 
+  const [videoUrl, setVideoUrl] = useState(false);
+  const handleCloseVideo = () => setOpenVideo(false);
+  const handleOpenVideo = (video) => {
+    setVideoUrl(video);
+    setOpenVideo(true);
+  };
+  let [openVideo, setOpenVideo] = useState(false);
+
+  const vidStyle = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: "80%",
+    bgcolor: "background.paper",
+    border: "2px solid #000",
+    boxShadow: 24,
+    p: 4,
+    // alignItems:""
+  };
   // let processPost = async (postId) => {
   //   let data = await (
   //     await fetch(`${apiHost}/posts/specialist/${postId}`, {
@@ -277,17 +303,38 @@ let DataCard = ({ title, description, video, postId }) => {
 
   return (
     <>
+      <Modal keepMounted open={openVideo} onClose={handleCloseVideo}>
+        <Box sx={vidStyle}>
+          <center>
+            <video
+            id="previewImg"
+            controls
+            height="500px"
+            src={videoUrl ? videoUrl : ""}
+          />
+          </center>
+          
+        </Box>
+      </Modal>
       <Card>
-        <CardMedia sx={{ height: 180 }} src={video} title="green iguana" />
+        <CardMedia
+          sx={{ height: 180 }}
+          component="video"
+          video={video}
+          src={video}
+          title="green iguana"
+        />
         <CardContent>
           <Typography
-            variant="h6"
+            variant="p"
             sx={{
               wordWrap: "break-word",
+              fontSize: "22px",
             }}
           >
             {String(title).substring(0, 37)}
           </Typography>
+          <br />
           <Typography
             variant="p"
             sx={{
@@ -305,7 +352,7 @@ let DataCard = ({ title, description, video, postId }) => {
             disableElevation
             sx={{ backgroundColor: "darkgreen" }}
             onClick={(e) => {
-              // processPost(postId);
+              handleOpenVideo(video);
             }}
           >
             View

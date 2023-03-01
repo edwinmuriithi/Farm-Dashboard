@@ -24,11 +24,13 @@ import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
-import DirectionsIcon from "@mui/icons-material/Directions";
 import { getCookie } from "./../lib/cookie";
 import { useNavigate } from "react-router-dom";
 import { DataGrid } from "@mui/x-data-grid";
 import { apiHost } from "../lib/api";
+import counties from "./../data/counties.json";
+import countiesToSubCounties from "./../data/county_to_consituencies.json";
+import codeToCounties from "./../data/code_to_counties_map.json";
 
 export default function Users() {
   let [users, setUsers] = useState(null);
@@ -39,6 +41,7 @@ export default function Users() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   let [selected, setSelected] = useState([]);
+  let [county, setCounty] = useState(null);
   let isMobile = useMediaQuery("(max-width:600px)");
   let navigate = useNavigate();
   let [openSnackBar, setOpenSnackBar] = useState(false);
@@ -238,7 +241,9 @@ export default function Users() {
     { field: "names", headerName: "Names", width: 200 },
     // { field: 'email', headerName: 'Email', width: 200 },
     { field: "phone", headerName: "Phone Number", width: 200 },
-    { field: "role", headerName: "Role", width: 180 },
+    { field: "role", headerName: "Role", width: 100 },
+    { field: "county", headerName: "County", width: 100 },
+    { field: "subCounty", headerName: "Sub-County", width: 100 },
     { field: "disabled", headerName: "Disabled", width: 200 },
   ];
 
@@ -264,6 +269,9 @@ export default function Users() {
         key={"loginAlert"}
       />
       <Stack direction="row" spacing={2} alignContent="right">
+        <Typography variant="p" sx={{ fontSize: "30px" }}>
+          Users{" "}
+        </Typography>
         {!isMobile && (
           <Typography
             sx={{
@@ -272,10 +280,11 @@ export default function Users() {
                   ? "60%"
                   : selected.length === 1
                   ? "30%"
-                  : "80%",
+                  : "70%",
             }}
           ></Typography>
         )}
+
         {selected.length > 0 && (
           <>
             <Button
@@ -327,6 +336,8 @@ export default function Users() {
           Create New User
         </Button>
       </Stack>
+      <p></p>
+      <Divider />
       <p></p>
       <Paper
         component="form"
@@ -433,41 +444,51 @@ export default function Users() {
             </FormControl>
 
             <Grid item xs={12} md={12} lg={6}>
-                <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label">
-                    County
-                  </InputLabel>
-                  <Select
-                    value={data.status}
-                    label="County"
-                    onChange={(e) => {
-                      setData({ ...data, county: e.target.value });
-                    }}
-                    size="small"
-                  >
-                    <MenuItem value={"disabled"}>Disabled</MenuItem>
-                    <MenuItem value={"enabled"}>Enabled</MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
-              <Grid item xs={12} md={12} lg={6}>
-                <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label">
-                    SubCounty
-                  </InputLabel>
-                  <Select
-                    value={data.status}
-                    label="SubCounty"
-                    onChange={(e) => {
-                      setData({ ...data, subCounty: e.target.value });
-                    }}
-                    size="small"
-                  >
-                    <MenuItem value={"disabled"}>Disabled</MenuItem>
-                    <MenuItem value={"enabled"}>Enabled</MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">County</InputLabel>
+                <Select
+                  value={data.status}
+                  label="County"
+                  onChange={(e) => {
+                    setCounty(e.target.value);
+                    setData({
+                      ...data,
+                      county: codeToCounties[e.target.value],
+                    });
+                  }}
+                  size="small"
+                >
+                  {counties.map((county) => {
+                    return (
+                      <MenuItem value={county.code}>{county.name}</MenuItem>
+                    );
+                  })}
+                  {/* <MenuItem value={"enabled"}>Enabled</MenuItem> */}
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item xs={12} md={12} lg={6}>
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">
+                  Sub-county
+                </InputLabel>
+                <Select
+                  value={data.status}
+                  label="SubCounty"
+                  onChange={(e) => {
+                    setData({ ...data, subCounty: e.target.value });
+                  }}
+                  size="small"
+                >
+                  {county &&
+                    countiesToSubCounties[county].map((county) => {
+                      return (
+                        <MenuItem value={county.name}>{county.name}</MenuItem>
+                      );
+                    })}
+                </Select>
+              </FormControl>
+            </Grid>
 
             {editMode && (
               <Grid item xs={12} md={12} lg={6}>
