@@ -33,6 +33,7 @@ import {
   ChatBubbleRounded,
   PostAdd,
   VideoCameraBackOutlined,
+  Money,
 } from "@mui/icons-material";
 import { useNavigate, Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -184,6 +185,12 @@ export default function HeaderDrawer({ children }) {
       name: "Users",
       icon: <People />,
       path: "/users",
+      roles: ["ADMINISTRATOR"],
+    },
+    {
+      name: "Payments",
+      icon: <Money />,
+      path: "/payments",
       roles: ["ADMINISTRATOR"],
     },
     {

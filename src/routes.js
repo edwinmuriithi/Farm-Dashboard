@@ -4,6 +4,7 @@ import Index from './pages/Index';
 import Messages from './pages/Messages';
 import Posts from './pages/Posts';
 import Media from './pages/Media';
+import Payments from './pages/Payments';
 
 const appRoutes = [
   {
@@ -25,6 +26,10 @@ const appRoutes = [
   {
     path: '/messaging',
     element: Messages,
+  },
+  {
+    path: '/payments',
+    element: Payments,
   },
   {
     path: '/media',
