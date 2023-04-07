@@ -274,6 +274,36 @@ let DataCard = ({ title, description, video, postId }) => {
   };
   let [openVideo, setOpenVideo] = useState(false);
 
+  // fetch dashboard stats
+  let getMedia = async () => {
+    let data = await (
+      await fetch(`${apiHost}/media`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${getCookie("token")}`,
+        },
+      })
+    ).json();
+    setPosts(data.media);
+    return;
+  };
+
+  // delete
+  let deleteMedia = async (id) => {
+    let data = await (
+      await fetch(`${apiHost}/media/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${getCookie("token")}`,
+        },
+      })
+    ).json();
+    get;
+    return;
+  };
+
   const vidStyle = {
     position: "absolute",
     top: "50%",
@@ -307,13 +337,12 @@ let DataCard = ({ title, description, video, postId }) => {
         <Box sx={vidStyle}>
           <center>
             <video
-            id="previewImg"
-            controls
-            height="500px"
-            src={videoUrl ? videoUrl : ""}
-          />
+              id="previewImg"
+              controls
+              height="500px"
+              src={videoUrl ? videoUrl : ""}
+            />
           </center>
-          
         </Box>
       </Modal>
       <Card>
@@ -357,6 +386,18 @@ let DataCard = ({ title, description, video, postId }) => {
           >
             View
           </Button>
+          {/* <Button
+            size="small"
+            variant="contained"
+            disableElevation
+            sx={{ backgroundColor: "red" }}
+            onClick={(e) => {
+              console.log(video);
+              deleteMedia(postId);
+            }}
+          >
+            Delete
+          </Button> */}
         </CardActions>
       </Card>
     </>

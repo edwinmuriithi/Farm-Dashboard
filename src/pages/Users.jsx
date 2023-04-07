@@ -192,6 +192,8 @@ export default function Users() {
           kmhflCode: data.kmhflCode || kmhflCode,
           status: data.status,
           phone: data.phone,
+          county: data.county,
+          subCounty: data.subCounty
         }),
       })
     ).json();
