@@ -1,1 +1,37 @@
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css');
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;1,100;1,400&display=swap');
+
+
+#root {
+  font-family: 'Lato', sans-serif;
+}
+
+hgroup {
+  font-family: 'Lato', sans-serif;
+}
+
+
+html {
+  scroll-behavior: smooth;
+  font-family: 'Lato', sans-serif;
+}
+
+/* Layout */
+main {
+  /* max-width: 700px; */
+  margin: 3rem auto;
+  padding: 0 1rem;
+  font-family: 'Lato', sans-serif;
+}
+
+#scroll-to-bottom {
+  font-weight: bold;
+  color: green;
+}
+
+.chatbox {
+  border: 3px green solid;
+  border-radius: 10px;
+  font-family: 'Lato', sans-serif;
+
+}

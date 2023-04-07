@@ -1,6 +1,6 @@
 import { getCookie } from './cookie';
 
-export let apiHost = import.meta.env.DEV ? "http://127.0.0.1:8080" : process.env['VITE_API_URL'];
+export let apiHost = import.meta.env.DEV ? "http://127.0.0.1:8080" : import.meta.env['VITE_API_URL'];
 
 export let createEncounter = async (patientId, encounterCode) => {
     try {
@@ -14,11 +14,11 @@ export let createEncounter = async (patientId, encounterCode) => {
                 "Content-Type": 'application/json',
                 "Authorization": `Bearer ${getCookie("token")}`,
             }
-        })).json()
-        console.log(encounter.id)
-        return encounter.encounter
+        })).json();
+        console.log(encounter.id);
+        return encounter.encounter;
     } catch (error) {
-        return null
+        return null;
     }
 }
 
@@ -40,7 +40,7 @@ export let FhirApi = async (params) => {
             statusText: response.statusText,
             data: responseJSON
         }
-        return res
+        return res;
     } catch (error) {
         console.error(error)
         let res = {

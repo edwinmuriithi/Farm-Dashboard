@@ -28,12 +28,10 @@ import { getCookie } from "./../lib/cookie";
 import { useNavigate } from "react-router-dom";
 import { DataGrid } from "@mui/x-data-grid";
 import { apiHost } from "../lib/api";
-import counties from "./../data/counties.json";
-import countiesToSubCounties from "./../data/county_to_consituencies.json";
-import codeToCounties from "./../data/code_to_counties_map.json";
 
-export default function Users() {
-  let [users, setUsers] = useState(null);
+
+export default function Payments() {
+  let [payments, setPayments] = useState(null);
   let [editMode, setEditMode] = useState(false);
   let [phone, setPhone] = useState(null);
   let [open, setOpen] = useState(false);
@@ -47,7 +45,6 @@ export default function Users() {
   let [openSnackBar, setOpenSnackBar] = useState(false);
   let [message, setMessage] = useState(false);
   let [role, setRole] = useState(null);
-  let [kmhflCode, setKmhflCode] = useState(null);
 
   function prompt(text) {
     setMessage(text);
@@ -79,9 +76,9 @@ export default function Users() {
   };
 
   // fetch users
-  let getUsers = async () => {
+  let getPayments = async () => {
     let data = await (
-      await fetch(`${apiHost}/users`, {
+      await fetch(`${apiHost}/payments`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -89,16 +86,16 @@ export default function Users() {
         },
       })
     ).json();
-    setUsers(data.users);
+    setPayments(data.payments);
     return;
   };
 
   // delete users
-  let deleteUsers = async () => {
+  let deletePayments = async () => {
     for (let i of selected) {
       setOpenSnackBar(false);
       let response = await (
-        await fetch(`${apiHost}/auth/${i}`, {
+        await fetch(`${apiHost}/payments/${i}`, {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
@@ -111,57 +108,26 @@ export default function Users() {
         setOpenSnackBar(true);
         return;
       }
-      getUsers();
+      getPayments();
       setOpen(false);
     }
     return;
   };
 
-  // reset Password
-  let resetPassword = async () => {
-    for (let i of selected) {
-      setOpenSnackBar(false);
-      let response = await (
-        await fetch(`${apiHost}/auth/reset-password`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${getCookie("token")}`,
-          },
-          body: JSON.stringify({ id: i }),
-        })
-      ).json();
-      if (response.status === "error") {
-        setMessage(response.error || response.message);
-        setOpenSnackBar(true);
-        return;
-      }
-      getUsers();
-      setMessage(response.error || response.message);
-      setOpenSnackBar(true);
-      setTimeout(() => {
-        setOpenSnackBar(false);
-      }, 3000);
-    }
-    return;
-  };
-
   // create user
-  let createUser = async () => {
+  let createPayment = async () => {
     setOpenSnackBar(false);
     let response = await (
-      await fetch(`${apiHost}/auth/register`, {
+      await fetch(`${apiHost}/payments`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${getCookie("token")}`,
         },
         body: JSON.stringify({
-          email: data.email,
-          names: data.names,
-          role: data.role,
-          kmhflCode: data.kmhflCode || kmhflCode,
+          amount: data.amount,
           phone: data.phone,
+          description: data.description,
         }),
       })
     ).json();
@@ -171,29 +137,24 @@ export default function Users() {
       return;
     }
     prompt(`Successfully created user`);
-    getUsers();
+    getPayments();
     setOpen(false);
     return;
   };
   // edit user
-  let editUser = async () => {
+  let editPayment = async () => {
     setOpenSnackBar(false);
     let response = await (
-      await fetch(`${apiHost}/users/${selected[0]}`, {
+      await fetch(`${apiHost}/payments/${selected[0]}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${getCookie("token")}`,
         },
         body: JSON.stringify({
-          email: data.email,
-          names: data.names,
-          role: data.role,
-          kmhflCode: data.kmhflCode || kmhflCode,
-          status: data.status,
+          amount: data.amount,
           phone: data.phone,
-          county: data.county,
-          subCounty: data.subCounty
+          description: data.description,
         }),
       })
     ).json();
@@ -202,8 +163,8 @@ export default function Users() {
       setOpenSnackBar(true);
       return;
     }
-    prompt(`Successfully created user`);
-    getUsers();
+    prompt(`Successfully created payment`);
+    getPayments();
     setOpen(false);
     return;
   };
@@ -211,7 +172,7 @@ export default function Users() {
   useEffect(() => {
     if (getCookie("token")) {
       getProfile();
-      getUsers();
+      getPayments();
       return;
     } else {
       navigate("/login");
@@ -220,10 +181,10 @@ export default function Users() {
     }
   }, []);
 
-  let searchUsers = async () => {
+  let searchPayments = async () => {
     try {
       let response = await (
-        await fetch(`${apiHost}/users?phone=${phone}`, {
+        await fetch(`${apiHost}/payments?phone=${phone}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -231,7 +192,7 @@ export default function Users() {
           },
         })
       ).json();
-      setUsers(response.users);
+      setPayments(response.payments);
       return;
     } catch (error) {
       prompt(JSON.stringify(error));
@@ -241,12 +202,10 @@ export default function Users() {
 
   const columns = [
     { field: "names", headerName: "Names", width: 200 },
-    // { field: 'email', headerName: 'Email', width: 200 },
     { field: "phone", headerName: "Phone Number", width: 200 },
-    { field: "role", headerName: "Role", width: 100 },
-    { field: "county", headerName: "County", width: 100 },
-    { field: "subCounty", headerName: "Sub-County", width: 100 },
-    { field: "disabled", headerName: "Disabled", width: 200 },
+    { field: "amount", headerName: "Amount", width: 120 },
+    { field: "description", headerName: "Description", width: 200 },
+    { field: "updatedAt", headerName: "Updated At", width: 200 },
   ];
 
   const style = {
@@ -272,17 +231,17 @@ export default function Users() {
       />
       <Stack direction="row" spacing={2} alignContent="right">
         <Typography variant="p" sx={{ fontSize: "30px" }}>
-          Users{" "}
+          Payments{" "}
         </Typography>
         {!isMobile && (
           <Typography
             sx={{
               minWidth:
                 selected.length > 1
-                  ? "60%"
+                  ? "35%"
                   : selected.length === 1
-                  ? "30%"
-                  : "70%",
+                  ? "25%"
+                  : "60%",
             }}
           ></Typography>
         )}
@@ -292,12 +251,12 @@ export default function Users() {
             <Button
               variant="contained"
               onClick={(e) => {
-                deleteUsers();
+                deletePayments();
               }}
               disableElevation
               sx={{ backgroundColor: "green" }}
             >
-              Delete User{selected.length > 1 && `s`}
+              Delete Payment{selected.length > 1 && `s`}
             </Button>
           </>
         )}
@@ -312,17 +271,7 @@ export default function Users() {
                 handleOpen();
               }}
             >
-              Edit User Details
-            </Button>
-            <Button
-              variant="contained"
-              disableElevation
-              sx={{ backgroundColor: "green" }}
-              onClick={(e) => {
-                resetPassword();
-              }}
-            >
-              Reset Password
+              Edit Payment Details
             </Button>
           </>
         )}
@@ -335,7 +284,7 @@ export default function Users() {
             handleOpen();
           }}
         >
-          Create New User
+          Create Payment
         </Button>
       </Stack>
       <p></p>
@@ -347,7 +296,7 @@ export default function Users() {
       >
         <InputBase
           sx={{ ml: 1, flex: 1 }}
-          placeholder="Search users by phone number"
+          placeholder="Search payments by phone number"
           inputProps={{ "aria-label": "search users" }}
           onChange={(e) => {
             setPhone(e.target.value);
@@ -358,7 +307,7 @@ export default function Users() {
           sx={{ p: "10px" }}
           aria-label="search"
           onClick={(e) => {
-            searchUsers();
+            searchPayments();
           }}
         >
           <SearchIcon />
@@ -367,8 +316,8 @@ export default function Users() {
       </Paper>
       <p></p>
       <DataGrid
-        loading={users ? false : true}
-        rows={users ? users : []}
+        loading={payments ? false : true}
+        rows={payments ? payments : []}
         columns={columns}
         pageSize={10}
         rowsPerPageOptions={[10]}
@@ -387,31 +336,12 @@ export default function Users() {
       <Modal keepMounted open={open} onClose={handleClose}>
         <Box sx={style}>
           <Typography id="keep-mounted-modal-title" variant="h6" component="h2">
-            {editMode ? "EDIT USER INFORMATION" : "ADD NEW USER"}
+            {editMode ? "EDIT PAYMENT INFORMATION" : "ADD NEW PAYMENT"}
           </Typography>
-          <Typography variant="p">Provide user information below</Typography>
+          <Typography variant="p">Provide payment information below</Typography>
           <br />
           <br />
           <Stack direction="column" spacing={2}>
-            <TextField
-              sx={{ width: "100%" }}
-              type="text"
-              label="Names"
-              placeholder="Names"
-              size="small"
-              onChange={(e) => {
-                setData({ ...data, names: e.target.value });
-              }}
-            />
-            {/* <TextField
-                                sx={{ width: "100%" }}
-                                type="email"
-                                label="Email Address"
-                                placeholder="Email Address"
-                                size="small"
-                                onChange={e => { setData({ ...data, email: e.target.value }) }}
-                            /> */}
-
             <TextField
               sx={{ width: "100%" }}
               type="tel"
@@ -423,103 +353,34 @@ export default function Users() {
               }}
             />
 
-            <FormControl fullWidth>
-              <InputLabel>Role</InputLabel>
-              <Select
-                value={data.role}
-                label="Role"
-                onChange={(e) => {
-                  setData({ ...data, role: e.target.value });
-                }}
-                size="small"
-              >
-                {role === "ADMINISTRATOR" && (
-                  <MenuItem value={"ADMINISTRATOR"}>Administrator</MenuItem>
-                )}
-                {role === "ADMINISTRATOR" && (
-                  <MenuItem value={"SPECIALIST"}>Specialist</MenuItem>
-                )}
-                {role === "ADMINISTRATOR" && (
-                  <MenuItem value={"USER"}>User</MenuItem>
-                )}
-              </Select>
-            </FormControl>
-
-            <Grid item xs={12} md={12} lg={6}>
-              <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">County</InputLabel>
-                <Select
-                  value={data.status}
-                  label="County"
-                  onChange={(e) => {
-                    setCounty(e.target.value);
-                    setData({
-                      ...data,
-                      county: codeToCounties[e.target.value],
-                    });
-                  }}
-                  size="small"
-                >
-                  {counties.map((county) => {
-                    return (
-                      <MenuItem value={county.code}>{county.name}</MenuItem>
-                    );
-                  })}
-                  {/* <MenuItem value={"enabled"}>Enabled</MenuItem> */}
-                </Select>
-              </FormControl>
-            </Grid>
-            <Grid item xs={12} md={12} lg={6}>
-              <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">
-                  Sub-county
-                </InputLabel>
-                <Select
-                  value={data.status}
-                  label="SubCounty"
-                  onChange={(e) => {
-                    setData({ ...data, subCounty: e.target.value });
-                  }}
-                  size="small"
-                >
-                  {county &&
-                    countiesToSubCounties[county].map((county) => {
-                      return (
-                        <MenuItem value={county.name}>{county.name}</MenuItem>
-                      );
-                    })}
-                </Select>
-              </FormControl>
-            </Grid>
-
-            {editMode && (
-              <Grid item xs={12} md={12} lg={6}>
-                <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label">
-                    Account Status
-                  </InputLabel>
-                  <Select
-                    value={data.status}
-                    label="Account Status"
-                    onChange={(e) => {
-                      setData({ ...data, status: e.target.value });
-                    }}
-                    size="small"
-                  >
-                    <MenuItem value={"disabled"}>Disabled</MenuItem>
-                    <MenuItem value={"enabled"}>Enabled</MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
-            )}
+            <TextField
+              sx={{ width: "100%" }}
+              type="tel"
+              label="Amount"
+              placeholder="Amount"
+              size="small"
+              onChange={(e) => {
+                setData({ ...data, amount: e.target.value });
+              }}
+            />
+            <TextField
+              sx={{ width: "100%" }}
+              type="tel"
+              label="Description"
+              placeholder="Description"
+              size="small"
+              onChange={(e) => {
+                setData({ ...data, description: e.target.value });
+              }}
+            />
             <Button
               variant="contained"
               sx={{ backgroundColor: "green" }}
               onClick={(e) => {
-                editMode ? editUser() : createUser();
+                editMode ? editPayment() : createPayment();
               }}
             >
-              {editMode ? "Update User Details" : "Create User"}
+              {editMode ? "Update Payment Details" : "Create Payment"}
             </Button>
             <br />
           </Stack>

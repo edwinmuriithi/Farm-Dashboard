@@ -6,7 +6,7 @@ import { apiHost } from '../lib/api'
 
 export default function ResetPassword(){
 
-    let [email, setEmail] = useState({})
+    let [phone, setPhone] = useState({})
     let navigate = useNavigate()
     let [open, setOpen] = useState(false)
     let [message, setMessage] = useState(false)
@@ -15,7 +15,7 @@ export default function ResetPassword(){
         let data = (await (await fetch(`${apiHost}/auth/reset-password`, 
             {   method:'POST', 
                 headers:{"Content-Type":"application/json", },
-                body: JSON.stringify(email)
+                body: JSON.stringify(phone)
             }
             )).json())
         console.log(data)
@@ -54,10 +54,10 @@ export default function ResetPassword(){
                 <CardContent>
                     <TextField  
                     sx={{minWidth:"100%"}}
-                    type="email"
-                    placeholder="Email address"
+                    type="phone"
+                    placeholder="Phone number"
                     size="small"
-                    onChange={e=>{setEmail({email:e.target.value})}}
+                    onChange={e=>{setPhone({phone:e.target.value})}}
                     />
                     <br/><br/>   
                     <Button variant="contained"

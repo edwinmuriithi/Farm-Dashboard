@@ -35,8 +35,8 @@ export default function Index() {
                 headers: { "Content-Type": "application/json", "Authorization": `Bearer ${getCookie("token")}` }
             })).json());
         setRole(_data.data.role);
-        if (_data.data.role === "NURSE") {
-            navigate("/nurse-dashboard");
+        if (_data.data.role === "SPECIALIST") {
+            navigate("/posts");
             return
         }
         return;
@@ -63,36 +63,11 @@ export default function Index() {
     return (
         <>
             
-                <br />
-                <Container maxWidth="lg">
-                    {(role === "ADMINISTRATOR" || role === "FACILITY_ADMINISTRATOR") ? <>
-                        <Typography variant="h5">Welcome </Typography>
-                        <Grid container spacing={1} padding=".5em" >
-                            {Object.keys(data).length > 0 && Object.keys(data).map((entry) => {
-                                return <Grid item xs={12} md={12} lg={3} >
-                                    <StatCard title={(entry).toUpperCase()} number={data[entry]} bg="#D0ADFC" />
-                                </Grid>
-                            })}
-                        </Grid>
-                    </> : <CircularProgress />}
-                </Container>
+    
             
         </>
     )
 
-}
-
-
-let StatCard = ({ number, title, bg }) => {
-
-    return <>
-        <Card sx={{ backgroundColor: bg }}>
-            <CardContent>
-                <Typography variant="h4">{number}</Typography>
-                <Typography variant="h6">{title}</Typography>
-            </CardContent>
-        </Card>
-    </>
 }
 
 
